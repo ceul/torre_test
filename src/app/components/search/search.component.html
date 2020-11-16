@@ -1,0 +1,22 @@
+<div class="container">
+    <div *ngIf='jobs' class="row">
+        <div *ngFor="let job of jobs.results" class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="thumb_strip">
+                                <img class="company_img" [src]="job.organizations[0].picture" alt="">
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <h3>{{job.objective}}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br><br>
+        </div>
+    </div>
+</div>
