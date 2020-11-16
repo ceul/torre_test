@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseService } from '../../services/base-service/base.service'
+import { LoadingSpinnerService } from '../../services/loading-spinner/loading-spinner.service';
 
 @Component({
   selector: 'app-search',
@@ -9,10 +10,16 @@ import { BaseService } from '../../services/base-service/base.service'
 export class SearchComponent implements OnInit {
 
   public jobs: any
-  constructor(private baseService: BaseService) { }
+  public people: any
+
+  constructor(private baseService: BaseService,
+    private loadingSpinnerService: LoadingSpinnerService,) { }
 
   async ngOnInit() {
-    this.jobs = await this.baseService.searchJobs()
+    //this.jobs = await this.baseService.searchJobs()
+    this.loadingSpinnerService.show()
+    this.people = await this.baseService.searchPeople()
+    this.loadingSpinnerService.hide()
   }
 
 }
