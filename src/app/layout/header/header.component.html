@@ -1,0 +1,35 @@
+<header [ngClass]="{'sticky': itsScrolled}">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col--md-4 col-sm-4 col-xs-4">
+                <a routerLink="/shop" id="logo">
+                    <img src="https://cdn-images-1.medium.com/max/800/1*kwBrOHykiJ4yLMihk-gEUQ.png" width="190" height="50" alt="" data-retina="true"
+                        class="hidden-xs">
+                    <img src="https://cdn-images-1.medium.com/max/800/1*kwBrOHykiJ4yLMihk-gEUQ.png" width="70" height="35" alt=""
+                        data-retina="true" class="hidden-lg hidden-md hidden-sm">
+                </a>
+            </div>
+            <nav class="col--md-8 col-sm-8 col-xs-8">
+                <a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" [ngClass]="{'active': clickMenu}"
+                    (click)="onClickMobileMenu()"><span>Menu
+                        mobile</span></a>
+                <div class="main-menu" [ngClass]="{'show': clickMenu}">
+                    <div id="header_menu">
+                        <img src="https://cdn-images-1.medium.com/max/800/1*kwBrOHykiJ4yLMihk-gEUQ.png" width="190" height="70" alt="" data-retina="true">
+                    </div>
+                    <a (click)="onClickMobileMenu()" class="open_close" id="close_in"><i class="icon_close"></i></a>
+                    <ul>
+                        <li><a (click)="onClickMobileMenu()" routerLink="/shop/home">Inicio</a></li>
+                    </ul>
+                </div><!-- End main-menu -->
+            </nav>
+        </div><!-- End row -->
+    </div><!-- End container -->
+</header>
+<br>
+<br>
+<br><br>
+<br>
+<br>
+<br>
+<!-- End Header =============================================== -->
