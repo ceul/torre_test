@@ -1,18 +1,88 @@
 <div class="container">
     <div *ngIf='jobs' class="row">
         <div *ngFor="let job of jobs.results" class="col-md-6">
-            <div class="card">
+            <div class="card" (onClick)="goToJob(job.id)">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="thumb_strip">
                                 <img class="company_img" [src]="job.organizations[0].picture" alt="">
                             </div>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-9">
                             <h3>{{job.objective}}</h3>
+                            <h4>{{job.organizations[0].name}}</h4>
+                            <h4>{{job.type | employmentType}}</h4>
+                            <br>
+                            <p *ngIf="job.compensation?.visible"><strong>{{job.compensation.data.currency}}
+                                    {{job.compensation.data.minAmount | currency}} <span
+                                        *ngIf="job.compensation.data.maxAmount">-
+                                        {{job.compensation.data.maxAmount | currency}}</span></strong>
+                                {{job.compensation.data.periodicity | periodicity}}
+
+                            </p>
+                            <p *ngIf="!job.compensation?.visible">Compensación: Oculto
+                            </p>
+                            <p><span *ngIf="job.remote">Remoto </span> <span
+                                    *ngFor="let location of job.locations">{{location}} ,</span>
+                            </p>
                         </div>
                     </div>
+                </div>
+                <div class="card-footer">
+                    <a class="btn_full_outline col-sm-5" (click)="forwardStep()">
+                        Ver</a>
+
+                </div>
+            </div>
+
+            <br><br>
+        </div>
+    </div>
+    <div *ngIf='people' class="row">
+        <div *ngFor="let person of people.results" class="col-md-6">
+            <div class="card" id="card{{number}}" (onClick)="goToPerson(person.username)">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="thumb_strip">
+                                <img class="company_img" [src]="person.picture" alt="">
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <h2><strong>{{person.name}}</strong></h2>
+                            <h3>{{person.professionalHeadline}}</h3>
+                            <h4>{{person.locationName}}
+                            </h4>
+                            <br>
+                            <div class="skills">
+                                <span *ngFor="let skill of person.skills"> {{skill.name}} </span>
+                            </div>
+
+                            <div class="row openTo">
+                                <div class="col-md-3">
+                                    <p>Disponible para:</p>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <ul>
+                                            <div *ngFor="let open of person.openTo" class="col-md-6">
+                                                <li>{{open | openTo}} </li>
+                                            </div>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a class="btn_full_outline col-sm-5" (click)="forwardStep()">
+                        Ver Genoma</a>
+
                 </div>
             </div>
 
