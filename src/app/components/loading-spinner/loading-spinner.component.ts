@@ -26,7 +26,7 @@ export class LoadingSpinnerComponent implements OnInit {
 
   ngOnInit() {
     this.lottieConfig = {
-      path: '../../../assets/animations/4544-loader-to-check.json',
+      path: '../../../assets/animations/pinjump.json',
       autoplay: true,
       renderer: 'canvas',
       loop: true

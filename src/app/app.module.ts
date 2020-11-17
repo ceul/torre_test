@@ -12,8 +12,15 @@ import { PeriodicityPipe } from './pipes/periodicity.pipe';
 import { EmploymentTypePipe } from './pipes/employment-type.pipe';
 import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
 import { LoadingSpinnerService } from './services/loading-spinner/loading-spinner.service';
-import { LottieAnimationViewModule } from 'ng-lottie';
 import { OpenToPipe } from './pipes/open-to.pipe';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { LottieModule } from 'ngx-lottie';
+import player from 'lottie-web';
+import { JobComponent } from './components/job/job.component';
+
+export function playerFactory() {
+  return player;
+}
 
 @NgModule({
   declarations: [
@@ -24,14 +31,16 @@ import { OpenToPipe } from './pipes/open-to.pipe';
     PeriodicityPipe,
     EmploymentTypePipe,
     LoadingSpinnerComponent,
-    OpenToPipe
+    OpenToPipe,
+    JobComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    LottieAnimationViewModule.forRoot(),
+    LottieModule.forRoot({ player: playerFactory }),
+    InfiniteScrollModule
   ],
   providers: [
     LoadingSpinnerService,

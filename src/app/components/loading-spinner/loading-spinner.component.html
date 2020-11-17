@@ -1,7 +1,7 @@
 <div [class.loading-hidden]="!show">
     <div class="loading">
-        <lottie-animation-view *ngIf="show" [options]="lottieConfig" [width]="300" [height]="600"
-            (animCreated)="handleAnimation($event)">
-        </lottie-animation-view>
+        <ng-lottie *ngIf="show" [options]="lottieConfig" [width]="300" [height]="600"
+            (animationCreated)="handleAnimation($event)">
+        </ng-lottie>
     </div>
 </div>
