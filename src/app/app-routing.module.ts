@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { SearchComponent } from './components/search/search.component';
 import { AppComponent } from './app.component';
+import { JobComponent } from './components/job/job.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,16 @@ const routes: Routes = [
       title: 'Search'
     }
   },
+  {
+    path: 'job/:id',
+    component: JobComponent,
+    data: {
+      title: 'Job'
+    }
+  },
+
+  
+
 
 ];
 
