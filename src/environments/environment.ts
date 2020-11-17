@@ -5,8 +5,6 @@
 
 export const environment = {
   production: false,
-  url: 'http://127.0.0.1',
-  port: '3100',
   getUser: 'https://torre.co/api/opportunities/',
   getJob: 'https://torre.bio/api/bios/',
   searchJobs: 'https://search.torre.co/opportunities/_search/?',
