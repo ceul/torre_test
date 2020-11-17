@@ -26,7 +26,7 @@
     </div>-->
     <br>
     <div *ngIf='jobs && typeSelected' class="row">
-        <div *ngFor="let job of jobs.results" class="col-sm-6">
+        <div *ngFor="let job of jobs" class="col-sm-6">
             <div class="card" (onClick)="goToJob(job.id)">
                 <div class="card-body">
                     <div class="row">
@@ -36,27 +36,28 @@
                             </div>
                         </div>
                         <div class="col-sm-9">
-                            <h3>{{job.objective}}</h3>
-                            <h4>{{job.organizations[0].name}}</h4>
-                            <h4>{{job.type | employmentType}}</h4>
+                            <h2>{{job.objective}}</h2>
+                            <h3>{{job.organizations[0].name}}</h3>
+                            <h3>{{job.type | employmentType}}</h3>
                             <br>
-                            <p *ngIf="job.compensation?.visible"><strong>{{job.compensation.data.currency}}
+                            <p class="openTo" *ngIf="job.compensation?.visible">
+                                <strong>{{job.compensation.data.currency}}
                                     {{job.compensation.data.minAmount | currency}} <span
                                         *ngIf="job.compensation.data.maxAmount">-
                                         {{job.compensation.data.maxAmount | currency}}</span></strong>
                                 {{job.compensation.data.periodicity | periodicity}}
 
                             </p>
-                            <p *ngIf="!job.compensation?.visible">Compensación: Oculto
+                            <p class="openTo" *ngIf="!job.compensation?.visible">Compensación: Oculto
                             </p>
-                            <p><span *ngIf="job.remote">Remoto </span> <span
+                            <p class="openTo"><span *ngIf="job.remote">Remoto </span> <span
                                     *ngFor="let location of job.locations">{{location}} ,</span>
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a class="btn_full_outline col-sm-5" (click)="forwardStep()">
+                    <a class="btn_full_outline col-sm-5" (click)="goToJob(job.id)">
                         Ver</a>
 
                 </div>
@@ -65,8 +66,13 @@
             <br><br>
         </div>
     </div>
+    <div class="row" *ngIf="typeSelected && totalJobs == jobs.length">
+        <div class="col-xs-12 alert alert-warning">
+            No tenemos mas para mostrarte
+        </div>
+    </div>
     <div *ngIf='people && !typeSelected' class="row">
-        <div *ngFor="let person of people.results" class="col-sm-6">
+        <div *ngFor="let person of people" class="col-sm-6">
             <div class="card" id="card{{number}}" (onClick)="goToPerson(person.username)">
                 <div class="card-body">
                     <div class="row">
@@ -81,11 +87,6 @@
                             <h4>{{person.locationName}}
                             </h4>
                             <br>
-
-
-
-
-
                         </div>
                     </div>
                     <div class="row">
@@ -114,7 +115,7 @@
 
                 </div>
                 <div class="card-footer">
-                    <a class="btn_full_outline col-sm-5" (click)="forwardStep()">
+                    <a class="btn_full_outline col-sm-5" [href]="getPersonUrl(person.username)" rel="noopener" target="_blank">
                         Ver Genoma</a>
 
                 </div>
@@ -123,4 +124,6 @@
             <br><br>
         </div>
     </div>
+    <app-loading-spinner></app-loading-spinner>
+    <div infiniteScroll [infiniteScrollDistance]="4" [infiniteScrollThrottle]="50" (scrolled)="onScroll()"></div>
 </div>

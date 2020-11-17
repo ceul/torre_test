@@ -40,10 +40,10 @@ export class BaseService {
     })
   }
 
-  searchJobs() {
+  searchJobs(lastKey = 0) {
     return new Promise(async (resolve, reject) => {
       try {
-        this.http.post(`${environment.searchJobs}offset=0&size=20&aggregate=true`, {}, { headers: this.headers }).pipe(take(1))
+        this.http.post(`${environment.searchJobs}offset=${lastKey}&size=20&aggregate=true`, {}, { headers: this.headers }).pipe(take(1))
           .subscribe((response: any) => {
             resolve(response);
           });
@@ -53,10 +53,10 @@ export class BaseService {
     })
   }
 
-  searchPeople() {
+  searchPeople(lastKey = 0) {
     return new Promise(async (resolve, reject) => {
       try {
-        this.http.post(`${environment.searchPeople}offset=0&size=20&aggregate=true`, {}, { headers: this.headers }).pipe(take(1))
+        this.http.post(`${environment.searchPeople}offset=${lastKey}&size=20&aggregate=true`, {}, { headers: this.headers }).pipe(take(1))
           .subscribe((response: any) => {
             resolve(response);
           });
