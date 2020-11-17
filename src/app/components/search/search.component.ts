@@ -11,15 +11,35 @@ export class SearchComponent implements OnInit {
 
   public jobs: any
   public people: any
+  public typeSelected: boolean
 
   constructor(private baseService: BaseService,
     private loadingSpinnerService: LoadingSpinnerService,) { }
 
   async ngOnInit() {
-    //this.jobs = await this.baseService.searchJobs()
     this.loadingSpinnerService.show()
-    this.people = await this.baseService.searchPeople()
+    this.typeSelected = true
+    this.jobs = await this.baseService.searchJobs()
+    //this.people = await this.baseService.searchPeople()
     this.loadingSpinnerService.hide()
+  }
+
+  async getPeople() {
+    try {
+      this.typeSelected = false
+      this.people = await this.baseService.searchPeople()
+    } catch (error) {
+      console.log(`An error occurred in getPeople`)
+    }
+  }
+
+  async getJobs() {
+    try {
+      this.typeSelected = true
+      this.jobs = await this.baseService.searchJobs()
+    } catch (error) {
+      console.log(`An error occurred in getJobs`)
+    }
   }
 
 }

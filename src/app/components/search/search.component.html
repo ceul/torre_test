@@ -1,15 +1,41 @@
 <div class="container">
-    <div *ngIf='jobs' class="row">
-        <div *ngFor="let job of jobs.results" class="col-md-6">
+    <div class="row">
+        <div class="col-xs-6">
+            <button type="button" (click)="getPeople()" class="btn btn-primary type_buton">Personas</button>
+        </div>
+        <div class="col-xs-6">
+            <button type="button" (click)="getJobs()" class="btn btn-primary type_buton">Empleos</button>
+        </div>
+    </div>
+    <!--<div class="row">
+        <div id="custom-search-input">
+            <div class="input-group ">
+                <ng-select class="search-query" (change)="tarifaChange()" [(ngModel)]="tarifaSelectedId" name="tarifa"
+                    id="tarifa" style="background-color: #fff;" [items]="tarifas" [hideSelected]="true" bindValue="id"
+                    bindLabel="nombre" placeholder="Selecciona el barrio para el envio"
+                    [ngClass]="{'is-invalid': submit}">
+                </ng-select>
+            </div>
+            <br>
+            <div>
+                <a class="btn_aceptar"><strong><i class="icon_cart_alt icono_carrito"></i>
+                        Buscar </strong>
+                </a>
+            </div>
+        </div>
+    </div>-->
+    <br>
+    <div *ngIf='jobs && typeSelected' class="row">
+        <div *ngFor="let job of jobs.results" class="col-sm-6">
             <div class="card" (onClick)="goToJob(job.id)">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-sm-3">
                             <div class="thumb_strip">
                                 <img class="company_img" [src]="job.organizations[0].picture" alt="">
                             </div>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-sm-9">
                             <h3>{{job.objective}}</h3>
                             <h4>{{job.organizations[0].name}}</h4>
                             <h4>{{job.type | employmentType}}</h4>
@@ -39,34 +65,42 @@
             <br><br>
         </div>
     </div>
-    <div *ngIf='people' class="row">
-        <div *ngFor="let person of people.results" class="col-md-6">
+    <div *ngIf='people && !typeSelected' class="row">
+        <div *ngFor="let person of people.results" class="col-sm-6">
             <div class="card" id="card{{number}}" (onClick)="goToPerson(person.username)">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-xs-3">
                             <div class="thumb_strip">
                                 <img class="company_img" [src]="person.picture" alt="">
                             </div>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-xs-9">
                             <h2><strong>{{person.name}}</strong></h2>
                             <h3>{{person.professionalHeadline}}</h3>
                             <h4>{{person.locationName}}
                             </h4>
                             <br>
+
+
+
+
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
                             <div class="skills">
                                 <span *ngFor="let skill of person.skills"> {{skill.name}} </span>
                             </div>
-
                             <div class="row openTo">
-                                <div class="col-md-3">
+                                <div class="col-xs-3">
                                     <p>Disponible para:</p>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-xs-9">
                                     <div class="row">
                                         <ul>
-                                            <div *ngFor="let open of person.openTo" class="col-md-6">
+                                            <div *ngFor="let open of person.openTo" class="col-xs-6">
                                                 <li>{{open | openTo}} </li>
                                             </div>
                                         </ul>
@@ -74,10 +108,10 @@
 
                                 </div>
                             </div>
-
-
                         </div>
+
                     </div>
+
                 </div>
                 <div class="card-footer">
                     <a class="btn_full_outline col-sm-5" (click)="forwardStep()">
